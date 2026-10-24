@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daniel Rodrigues</title>
+  <meta name="description" content="Daniel Rodrigues — Nurse, Medical Informatics MSc and PhD candidate in Health Data Science. Research and Innovation Manager at VirtualCare, Porto.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --surface: #ffffff;
+      --text: #1d2125;
+      --muted: #5c646d;
+      --line: #e3e1da;
+      --accent: #0f766e;
+      --accent-soft: #e3f1ef;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121517;
+        --surface: #1a1f22;
+        --text: #e8eaeb;
+        --muted: #9aa3aa;
+        --line: #2a3135;
+        --accent: #4fd1c0;
+        --accent-soft: #17302d;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.65 "Inter", system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+    /* Navigation */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap { display: flex; align-items: center; gap: 24px; height: 56px; overflow-x: auto; scrollbar-width: none; }
+    nav .wrap::-webkit-scrollbar { display: none; }
+    nav .brand { font-family: "Fraunces", serif; font-weight: 600; color: var(--text); white-space: nowrap; margin-right: auto; }
+    nav a.link { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a.link:hover { color: var(--text); text-decoration: none; }
+
+    /* Hero */
+    header.hero { padding: 72px 0 56px; }
+    .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 12px; }
+    h1 {
+      font-family: "Fraunces", serif; font-weight: 600;
+      font-size: clamp(40px, 7vw, 64px); line-height: 1.05; margin: 0 0 20px; letter-spacing: -.01em;
+    }
+    .lead { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0 0 28px; }
+    .contacts { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px;
+      background: var(--surface); color: var(--text); font-size: 14px;
+    }
+    .chip:hover { border-color: var(--accent); text-decoration: none; }
+    .chip svg { width: 16px; height: 16px; flex: none; color: var(--accent); }
+    .chip.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    .chip.primary svg { color: var(--bg); }
+
+    /* Sections */
+    section { padding: 48px 0; border-top: 1px solid var(--line); scroll-margin-top: 56px; }
+    h2 { font-family: "Fraunces", serif; font-weight: 600; font-size: 28px; margin: 0 0 28px; }
+    h3 { font-size: 17px; font-weight: 600; margin: 0; }
+    p { margin: 0 0 12px; }
+
+    /* Timeline */
+    .timeline { list-style: none; margin: 0; padding: 0; }
+    .item { display: grid; grid-template-columns: 170px 1fr; gap: 24px; padding-bottom: 32px; }
+    .item:last-child { padding-bottom: 0; }
+    .when { color: var(--muted); font-size: 14px; padding-top: 2px; font-variant-numeric: tabular-nums; }
+    .org { color: var(--muted); font-size: 15px; margin: 2px 0 10px; }
+    .item ul { margin: 0; padding-left: 18px; }
+    .item li { margin-bottom: 6px; }
+    .item li::marker { color: var(--accent); }
+
+    .projects { display: grid; gap: 12px; margin: 14px 0 4px; }
+    .project { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+    .project h4 { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+    .project p { margin: 0; font-size: 15px; color: var(--muted); }
+    .project .role { color: var(--text); margin-top: 8px; }
+    .project .role b { color: var(--accent); font-weight: 600; }
+
+    /* Cards */
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+    .card h3 { margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 15px; margin: 0; }
+    .card.wide { grid-column: 1 / -1; }
+
+    .badge {
+      display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .02em;
+      color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 2px 8px; margin-bottom: 10px;
+    }
+
+    .pubs { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+    .pubs li { padding-left: 16px; border-left: 2px solid var(--accent-soft); font-size: 15px; color: var(--text); }
+    .pubs .venue { color: var(--muted); }
+
+    footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 640px) {
+      header.hero { padding: 48px 0 40px; }
+      .lead { font-size: 17px; }
+      .item { grid-template-columns: 1fr; gap: 4px; }
+      .cards { grid-template-columns: 1fr; }
+      nav .brand { display: none; }
+      nav .wrap { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Daniel Rodrigues</a>
+    <a class="link" href="#experience">Experience</a>
+    <a class="link" href="#education">Education</a>
+    <a class="link" href="#research">Research</a>
+    <a class="link" href="#community">Community</a>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <p class="eyebrow">Health Informatics · Porto</p>
+    <h1>Daniel Rodrigues</h1>
+    <p class="lead">
+      Nurse turned health informatician. Research and Innovation Manager at VirtualCare and PhD candidate in
+      Health Data Science at the University of Porto, working on interoperability, electronic health records and
+      large language models in healthcare and nursing education.
+    </p>
+    <div class="contacts">
+      <a class="chip primary" href="CV_Daniel_Rodrigues.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+        Download CV
+      </a>
+      <a class="chip" href="mailto:danielrodriguesmim@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        Email
+      </a>
+      <a class="chip" href="https://www.linkedin.com/in/daniel-rodrigues-ies" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.5h4V21H3V9.5zm6.5 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4V9.5z"/></svg>
+        LinkedIn
+      </a>
+      <a class="chip" href="https://orcid.org/0000-0002-0777-1540" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM8.3 7.2a.9.9 0 110 1.8.9.9 0 010-1.8zM7.6 10h1.4v7.3H7.6V10zm3 0h3.3c3.1 0 4.5 2.2 4.5 3.7 0 1.6-1.3 3.7-4.4 3.7h-3.4V10zm1.4 1.3v4.8h1.8c2.6 0 3.1-1.9 3.1-2.4 0-.8-.5-2.4-3-2.4H12z"/></svg>
+        ORCID
+      </a>
+    </div>
+  </header>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <ol class="timeline">
+      <li class="item">
+        <div class="when">Jan 2026 – present</div>
+        <div>
+          <h3>Research and Innovation Manager</h3>
+          <div class="org">VirtualCare · Porto</div>
+          <ul>
+            <li>Contributes to national and international project applications relevant to the company’s products.</li>
+            <li>Active role in the management of 7 funded projects, including:</li>
+          </ul>
+          <div class="projects">
+            <div class="project">
+              <h4>MyHealth@MyHands</h4>
+              <p>Improving digital healthcare in the EU by ensuring universal and interoperable access to online health records by 2030, aligned with EU interoperability frameworks (EHDS, Digital Europe Programme).</p>
+              <p class="role"><b>Role:</b> steering the development of an obstetrics use case for cross-border exchange of pregnancy records.</p>
+            </div>
+            <div class="project">
+              <h4>HealthChain – RecoMed</h4>
+              <p>A demand-driven, co-creative innovation model geared for adoption and enabled by its ecosystem.</p>
+              <p class="role"><b>Role:</b> designing, implementing and evaluating a medication reconciliation system that interoperates with prescription and hospital information systems.</p>
+            </div>
+            <div class="project">
+              <h4>MedGPT</h4>
+              <p>Embeds ethical AI and GDPR/MDR compliance, using European-based LLMs to set a standard for medical GPT globally.</p>
+              <p class="role"><b>Role:</b> leading the national consortium in developing obstetrics EHR use cases with LLMs.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="item">
+        <div class="when">Nov 2023 – Dec 2025</div>
+        <div>
+          <h3>Business Developer</h3>
+          <div class="org">VirtualCare · Porto</div>
+          <ul>
+            <li>Product presentations to key clients, including CEOs, executives and technical professionals.</li>
+            <li>Promoted and coordinated partnerships with companies, healthcare institutions, NGOs and ecosystem innovators.</li>
+            <li>Represented the company at national and international conferences to disseminate products and research.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="item">
+        <div class="when">Mar 2023 – Dec 2025</div>
+        <div>
+          <h3>Functional Analyst</h3>
+          <div class="org">VirtualCare · Porto</div>
+          <ul>
+            <li>Software implementation in hospitals.</li>
+            <li>Gathering of functional and non-functional software requirements.</li>
+            <li>Training nurses and physicians in electronic health record systems.</li>
+            <li>Process reengineering in healthcare services to accommodate new health information systems.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="item">
+        <div class="when">May 2023 – present</div>
+        <div>
+          <h3>Instructor – Artificial Intelligence in Healthcare</h3>
+          <div class="org">SE – Sindicato dos Enfermeiros · Porto</div>
+          <ul>
+            <li>Lectures to nurses on Artificial Intelligence in Healthcare, Cybersecurity and ChatGPT applications.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="item">
+        <div class="when">Feb 2022 – Mar 2023</div>
+        <div>
+          <h3>Teletriage Nurse</h3>
+          <div class="org">Knok Health Portugal · Porto</div>
+          <ul>
+            <li>More than 5,000 AI-supported triages in one year.</li>
+            <li>Contributed to the development of Knok’s teletriage solution.</li>
+            <li>First member of the triage team, together with the coordinator.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="item">
+        <div class="when">Sep 2020 – Feb 2022</div>
+        <div>
+          <h3>Nurse</h3>
+          <div class="org">Medicisforma, Previmed, Clínica Médica de Paranhos, DomusVI Júlio Dinis, SNS24 · Porto</div>
+          <ul>
+            <li>Occupational health nursing appointments and complementary diagnostic exams.</li>
+            <li>Blood collection and COVID-19 testing procedures.</li>
+            <li>Member of a multidisciplinary team in a residential structure for the elderly, responsible for documenting, treating and recording wound evolution.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <ol class="timeline">
+      <li class="item">
+        <div class="when">Sep 2025 – present</div>
+        <div>
+          <h3>PhD in Health Data Science</h3>
+          <div class="org">Faculty of Medicine – University of Porto</div>
+        </div>
+      </li>
+      <li class="item">
+        <div class="when">2025</div>
+        <div>
+          <h3>MSc in Medical Informatics</h3>
+          <div class="org">Faculty of Medicine / Faculty of Science – University of Porto</div>
+          <p>Dissertation: <em>Clinical Simulation using Large Language Models in Nursing Education</em> — graded 20/20.</p>
+        </div>
+      </li>
+      <li class="item">
+        <div class="when">2020</div>
+        <div>
+          <h3>BSc in Nursing</h3>
+          <div class="org">Nursing School of Porto</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="research">
+    <h2>Research &amp; Publications</h2>
+    <div class="cards">
+      <div class="card wide">
+        <span class="badge">Master’s dissertation · 20/20</span>
+        <h3>Clinical Simulation using Large Language Models in Nursing Education</h3>
+        <p>Developed a local Clinical Case Generator based on large language models, built with tools such as Ollama and Langflow, and evaluated through a modified Turing Test.</p>
+        <ul class="pubs">
+          <li><b>Large Language Models in Nursing Education: State-of-the-Art</b> — oral presentation. <span class="venue">MIE 2024, Athens.</span> <a href="https://doi.org/10.3233/SHTI240584" target="_blank" rel="noopener">DOI: 10.3233/SHTI240584</a></li>
+          <li><b>e4Nursing – educational software for nursing education</b> — workshop author. <span class="venue">MIE 2024, Athens.</span></li>
+          <li><b>Proposal for Integrating and Evaluating Large Language Models into Nursing Education</b> — abstract and presentation. <span class="venue">Nursing Informatics 2024, Manchester.</span></li>
+        </ul>
+      </div>
+      <div class="card wide">
+        <span class="badge">Volunteer researcher</span>
+        <h3>CINTESIS / FMUP</h3>
+        <p>Worked on two research projects: Secur-e-health and Inno4Health.</p>
+        <ul class="pubs">
+          <li><b>Inno4health project: towards wearable devices for the activity monitoring of intermittent claudication patients</b> <span class="venue">CAPSI 2022.</span></li>
+          <li><b>Paper in the International Journal of Environmental Research and Public Health</b> <a href="https://doi.org/10.3390/ijerph192215231" target="_blank" rel="noopener">DOI: 10.3390/ijerph192215231</a></li>
+          <li><b>Smart Wearable Systems for the Remote Monitoring of Venous and Diabetic Foot Ulcers: State of the Art</b> <span class="venue">ISAmI 2022.</span> <a href="https://doi.org/10.1007/978-3-031-22356-3_10" target="_blank" rel="noopener">DOI: 10.1007/978-3-031-22356-3_10</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="badge">Peer review</span>
+        <h3>Journal reviewer</h3>
+        <p>Reviewer for Elsevier’s <em>Nurse Education in Practice</em> (ISSN 1471-5953) and for <em>JMIR Cancer</em>.</p>
+      </div>
+      <div class="card">
+        <span class="badge">Evaluation</span>
+        <h3>A3ES External Evaluation Committee</h3>
+        <p>Evaluated a Bachelor’s and a Master’s degree in Nursing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <h2>Community &amp; Leadership</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Chair, Educational Group in Health Informatics — e-MAIS</h3>
+        <p>Chair of the Educational Group of the Portuguese Health Informatics Association, recognised by EFMI. <a href="https://e-mais.pt/grupos-de-trabalho/educacao" target="_blank" rel="noopener">e-mais.pt</a></p>
+      </div>
+      <div class="card">
+        <h3>EFMI Atlas team</h3>
+        <p>Developing a knowledge graph that makes the knowledge in EFMI’s conference publications available to the community.</p>
+      </div>
+      <div class="card">
+        <h3>Member, IMIA SEP</h3>
+        <p>Invited member of the International Medical Informatics Association Students and Emerging Professionals Group, after Nursing Informatics 2024.</p>
+      </div>
+      <div class="card">
+        <h3>Member, EFMI Education WG</h3>
+        <p>Invited to join the European Federation for Medical Informatics Education Working Group.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Daniel Rodrigues · Porto, Portugal</div>
+</footer>
+
+</body>
+</html>
